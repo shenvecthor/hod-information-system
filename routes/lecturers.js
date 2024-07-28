@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Lecturer = require('../models/Lecturer');
 
+//Get all lecturers for dropdown
+router.get('/list', async (req, res) => {
+  try {
+    const lecturers = await Lecturer.find({}, 'name _id');
+    res.json(lecturers);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Get all lecturers
 router.get('/', async (req, res) => {
   try {
