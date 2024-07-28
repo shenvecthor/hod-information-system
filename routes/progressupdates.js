@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ProgressUpdate = require('../models/ProgressUpdate');
 
+
 // Get all progress updates
 router.get('/', async (req, res) => {
   try {
@@ -25,7 +26,17 @@ router.get('/:id', async (req, res) => {
 
 // Create a new progress update
 router.post('/', async (req, res) => {
-  const update = new ProgressUpdate(req.body);
+  const update = new ProgressUpdate({
+    course: req.body.course,
+    lecturer: req.body.lecturer,
+    gradingStatus: req.body.gradingStatus,
+    gradingCompletionDate: req.body.gradingCompletionDate,
+    marksheetStatus: req.body.marksheetStatus,
+    marksheetCompletionDate: req.body.marksheetCompletionDate,
+    marksheetSubmitted: req.body.marksheetSubmitted,
+    marksheetSubmissionDate: req.body.marksheetSubmissionDate
+  });
+
   try {
     const newUpdate = await update.save();
     res.status(201).json(newUpdate);
@@ -33,6 +44,7 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 // Update a progress update
 router.patch('/:id', async (req, res) => {

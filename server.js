@@ -19,6 +19,7 @@ const lecturersRoutes = require('./routes/lecturers');
 const semestersRoutes = require('./routes/semesters');
 const progressUpdatesRoutes = require('./routes/progressupdates');
 
+
 // Use routes
 app.use('/api/courses', coursesRoutes);
 app.use('/api/lecturers', lecturersRoutes);
